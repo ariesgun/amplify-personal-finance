@@ -1,0 +1,9 @@
+type Record @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  name: String
+  category: String
+  amount: Float
+  transactionDate: AWSDate
+  currency: String
+  description: String
+}

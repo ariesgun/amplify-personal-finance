@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "PersonalFinancialTracker",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authPersonalFinancialTracker",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

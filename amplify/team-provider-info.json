@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-personalfinancialtra-staging-100756-authRole",
+      "UnauthRoleArn": "arn:aws:iam::460535678630:role/amplify-personalfinancialtra-staging-100756-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::460535678630:role/amplify-personalfinancialtra-staging-100756-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-personalfinancialtra-staging-100756-deployment",
+      "UnauthRoleName": "amplify-personalfinancialtra-staging-100756-unauthRole",
+      "StackName": "amplify-personalfinancialtra-staging-100756",
+      "StackId": "arn:aws:cloudformation:eu-central-1:460535678630:stack/amplify-personalfinancialtra-staging-100756/cc059df0-2940-11ee-9775-022ac5305bea",
+      "AmplifyAppId": "d3rh19oqr156z0"
+    },
+    "categories": {
+      "auth": {
+        "PersonalFinancialTracker": {}
+      }
+    }
+  }
+}
