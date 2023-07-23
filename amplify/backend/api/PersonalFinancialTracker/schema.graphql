@@ -6,4 +6,4 @@ type Record @model @auth(rules: [{allow: owner}]) {
   transactionDate: AWSDate
   currency: String
   description: String
-}
+} 

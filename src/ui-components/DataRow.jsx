@@ -9,7 +9,7 @@ import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, Flex, Text } from "@aws-amplify/ui-react";
 export default function DataRow(props) {
-  const { overrides, ...rest } = props;
+  const { record, overrides, ...rest } = props;
   return (
     <Flex
       gap="16px"
@@ -30,7 +30,9 @@ export default function DataRow(props) {
         height="unset"
         justifyContent="center"
         alignItems="center"
-        shrink="0"
+        grow="1"
+        shrink="1"
+        basis="0"
         position="relative"
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Frame 437")}
@@ -53,7 +55,7 @@ export default function DataRow(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Label"
+          children={record?.name}
           {...getOverrideProps(overrides, "label")}
         ></Text>
         <Text
@@ -74,7 +76,7 @@ export default function DataRow(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Category"
+          children={record?.category}
           {...getOverrideProps(overrides, "category")}
         ></Text>
       </Flex>
@@ -96,7 +98,7 @@ export default function DataRow(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children="12/03/2023"
+        children={record?.transactionDate}
         {...getOverrideProps(overrides, "datestamp")}
       ></Text>
       <Text
@@ -119,7 +121,7 @@ export default function DataRow(props) {
         position="relative"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children="Value"
+        children={record?.amount}
         {...getOverrideProps(overrides, "value")}
       ></Text>
       <Button

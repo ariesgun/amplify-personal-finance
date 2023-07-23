@@ -5,6 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
+import { Record } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { ButtonProps, FlexProps, TextProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -19,6 +20,8 @@ export declare type DataRowOverridesProps = {
     RemoveButton?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type DataRowProps = React.PropsWithChildren<Partial<FlexProps> & {
+    record?: Record;
+} & {
     overrides?: DataRowOverridesProps | undefined | null;
 }>;
 export default function DataRow(props: DataRowProps): React.ReactElement;

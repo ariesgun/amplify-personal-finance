@@ -6,7 +6,14 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  TextAreaField,
+  TextField,
+  useTheme,
+} from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Record } from "../models";
 import { fetchByPath, validateField } from "./utils";
@@ -17,45 +24,47 @@ export default function RecordCreateForm(props) {
     onSuccess,
     onError,
     onSubmit,
+    onCancel,
     onValidate,
     onChange,
     overrides,
     ...rest
   } = props;
+  const { tokens } = useTheme();
   const initialValues = {
     name: "",
-    category: "",
-    amount: "",
     transactionDate: "",
+    category: "",
     currency: "",
+    amount: "",
     description: "",
   };
   const [name, setName] = React.useState(initialValues.name);
-  const [category, setCategory] = React.useState(initialValues.category);
-  const [amount, setAmount] = React.useState(initialValues.amount);
   const [transactionDate, setTransactionDate] = React.useState(
     initialValues.transactionDate
   );
+  const [category, setCategory] = React.useState(initialValues.category);
   const [currency, setCurrency] = React.useState(initialValues.currency);
+  const [amount, setAmount] = React.useState(initialValues.amount);
   const [description, setDescription] = React.useState(
     initialValues.description
   );
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setName(initialValues.name);
-    setCategory(initialValues.category);
-    setAmount(initialValues.amount);
     setTransactionDate(initialValues.transactionDate);
+    setCategory(initialValues.category);
     setCurrency(initialValues.currency);
+    setAmount(initialValues.amount);
     setDescription(initialValues.description);
     setErrors({});
   };
   const validations = {
     name: [],
-    category: [],
-    amount: [],
     transactionDate: [],
+    category: [],
     currency: [],
+    amount: [],
     description: [],
   };
   const runValidationTasks = async (
@@ -79,16 +88,16 @@ export default function RecordCreateForm(props) {
     <Grid
       as="form"
       rowGap="15px"
-      columnGap="15px"
+      columnGap={tokens.space.medium.value}
       padding="20px"
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
           name,
-          category,
-          amount,
           transactionDate,
+          category,
           currency,
+          amount,
           description,
         };
         const validationResponses = await Promise.all(
@@ -145,10 +154,10 @@ export default function RecordCreateForm(props) {
           if (onChange) {
             const modelFields = {
               name: value,
-              category,
-              amount,
               transactionDate,
+              category,
               currency,
+              amount,
               description,
             };
             const result = onChange(modelFields);
@@ -165,68 +174,6 @@ export default function RecordCreateForm(props) {
         {...getOverrideProps(overrides, "name")}
       ></TextField>
       <TextField
-        label="Category"
-        isRequired={false}
-        isReadOnly={false}
-        value={category}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              name,
-              category: value,
-              amount,
-              transactionDate,
-              currency,
-              description,
-            };
-            const result = onChange(modelFields);
-            value = result?.category ?? value;
-          }
-          if (errors.category?.hasError) {
-            runValidationTasks("category", value);
-          }
-          setCategory(value);
-        }}
-        onBlur={() => runValidationTasks("category", category)}
-        errorMessage={errors.category?.errorMessage}
-        hasError={errors.category?.hasError}
-        {...getOverrideProps(overrides, "category")}
-      ></TextField>
-      <TextField
-        label="Amount"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={amount}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              name,
-              category,
-              amount: value,
-              transactionDate,
-              currency,
-              description,
-            };
-            const result = onChange(modelFields);
-            value = result?.amount ?? value;
-          }
-          if (errors.amount?.hasError) {
-            runValidationTasks("amount", value);
-          }
-          setAmount(value);
-        }}
-        onBlur={() => runValidationTasks("amount", amount)}
-        errorMessage={errors.amount?.errorMessage}
-        hasError={errors.amount?.hasError}
-        {...getOverrideProps(overrides, "amount")}
-      ></TextField>
-      <TextField
         label="Transaction date"
         isRequired={false}
         isReadOnly={false}
@@ -237,10 +184,10 @@ export default function RecordCreateForm(props) {
           if (onChange) {
             const modelFields = {
               name,
-              category,
-              amount,
               transactionDate: value,
+              category,
               currency,
+              amount,
               description,
             };
             const result = onChange(modelFields);
@@ -257,48 +204,116 @@ export default function RecordCreateForm(props) {
         {...getOverrideProps(overrides, "transactionDate")}
       ></TextField>
       <TextField
-        label="Currency"
+        label="Category"
         isRequired={false}
         isReadOnly={false}
-        value={currency}
+        value={category}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
-              category,
-              amount,
               transactionDate,
-              currency: value,
+              category: value,
+              currency,
+              amount,
               description,
             };
             const result = onChange(modelFields);
-            value = result?.currency ?? value;
+            value = result?.category ?? value;
           }
-          if (errors.currency?.hasError) {
-            runValidationTasks("currency", value);
+          if (errors.category?.hasError) {
+            runValidationTasks("category", value);
           }
-          setCurrency(value);
+          setCategory(value);
         }}
-        onBlur={() => runValidationTasks("currency", currency)}
-        errorMessage={errors.currency?.errorMessage}
-        hasError={errors.currency?.hasError}
-        {...getOverrideProps(overrides, "currency")}
+        onBlur={() => runValidationTasks("category", category)}
+        errorMessage={errors.category?.errorMessage}
+        hasError={errors.category?.hasError}
+        {...getOverrideProps(overrides, "category")}
       ></TextField>
-      <TextField
+      <Grid
+        columnGap="inherit"
+        rowGap="inherit"
+        templateColumns="repeat(2, auto)"
+        {...getOverrideProps(overrides, "RowGrid3")}
+      >
+        <TextField
+          label="Currency"
+          isRequired={false}
+          isReadOnly={false}
+          value={currency}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (onChange) {
+              const modelFields = {
+                name,
+                transactionDate,
+                category,
+                currency: value,
+                amount,
+                description,
+              };
+              const result = onChange(modelFields);
+              value = result?.currency ?? value;
+            }
+            if (errors.currency?.hasError) {
+              runValidationTasks("currency", value);
+            }
+            setCurrency(value);
+          }}
+          onBlur={() => runValidationTasks("currency", currency)}
+          errorMessage={errors.currency?.errorMessage}
+          hasError={errors.currency?.hasError}
+          {...getOverrideProps(overrides, "currency")}
+        ></TextField>
+        <TextField
+          label="Amount"
+          isRequired={false}
+          isReadOnly={false}
+          type="number"
+          step="any"
+          value={amount}
+          onChange={(e) => {
+            let value = isNaN(parseFloat(e.target.value))
+              ? e.target.value
+              : parseFloat(e.target.value);
+            if (onChange) {
+              const modelFields = {
+                name,
+                transactionDate,
+                category,
+                currency,
+                amount: value,
+                description,
+              };
+              const result = onChange(modelFields);
+              value = result?.amount ?? value;
+            }
+            if (errors.amount?.hasError) {
+              runValidationTasks("amount", value);
+            }
+            setAmount(value);
+          }}
+          onBlur={() => runValidationTasks("amount", amount)}
+          errorMessage={errors.amount?.errorMessage}
+          hasError={errors.amount?.hasError}
+          {...getOverrideProps(overrides, "amount")}
+        ></TextField>
+      </Grid>
+      <TextAreaField
         label="Description"
         isRequired={false}
         isReadOnly={false}
-        value={description}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
               name,
-              category,
-              amount,
               transactionDate,
+              category,
               currency,
+              amount,
               description: value,
             };
             const result = onChange(modelFields);
@@ -313,7 +328,7 @@ export default function RecordCreateForm(props) {
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
-      ></TextField>
+      ></TextAreaField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
@@ -328,9 +343,17 @@ export default function RecordCreateForm(props) {
           {...getOverrideProps(overrides, "ClearButton")}
         ></Button>
         <Flex
-          gap="15px"
+          gap={tokens.space.medium.value}
           {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
+          <Button
+            children="Cancel"
+            type="button"
+            onClick={() => {
+              onCancel && onCancel();
+            }}
+            {...getOverrideProps(overrides, "CancelButton")}
+          ></Button>
           <Button
             children="Submit"
             type="submit"

@@ -12,6 +12,7 @@ export { default as CommentCard } from "./CommentCard";
 export { default as ContactUs } from "./ContactUs";
 export { default as DataRow } from "./DataRow";
 export { default as DataRow2 } from "./DataRow2";
+export { default as DataRowCollection } from "./DataRowCollection";
 export { default as EditProfile } from "./EditProfile";
 export { default as Features2x2 } from "./Features2x2";
 export { default as Filters } from "./Filters";

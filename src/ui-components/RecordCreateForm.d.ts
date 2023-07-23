@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
@@ -14,29 +14,30 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type RecordCreateFormInputValues = {
     name?: string;
-    category?: string;
-    amount?: number;
     transactionDate?: string;
+    category?: string;
     currency?: string;
+    amount?: number;
     description?: string;
 };
 export declare type RecordCreateFormValidationValues = {
     name?: ValidationFunction<string>;
-    category?: ValidationFunction<string>;
-    amount?: ValidationFunction<number>;
     transactionDate?: ValidationFunction<string>;
+    category?: ValidationFunction<string>;
     currency?: ValidationFunction<string>;
+    amount?: ValidationFunction<number>;
     description?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type RecordCreateFormOverridesProps = {
     RecordCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     name?: PrimitiveOverrideProps<TextFieldProps>;
-    category?: PrimitiveOverrideProps<TextFieldProps>;
-    amount?: PrimitiveOverrideProps<TextFieldProps>;
     transactionDate?: PrimitiveOverrideProps<TextFieldProps>;
+    category?: PrimitiveOverrideProps<TextFieldProps>;
+    RowGrid3?: PrimitiveOverrideProps<GridProps>;
     currency?: PrimitiveOverrideProps<TextFieldProps>;
-    description?: PrimitiveOverrideProps<TextFieldProps>;
+    amount?: PrimitiveOverrideProps<TextFieldProps>;
+    description?: PrimitiveOverrideProps<TextAreaFieldProps>;
 } & EscapeHatchProps;
 export declare type RecordCreateFormProps = React.PropsWithChildren<{
     overrides?: RecordCreateFormOverridesProps | undefined | null;
@@ -45,6 +46,7 @@ export declare type RecordCreateFormProps = React.PropsWithChildren<{
     onSubmit?: (fields: RecordCreateFormInputValues) => RecordCreateFormInputValues;
     onSuccess?: (fields: RecordCreateFormInputValues) => void;
     onError?: (fields: RecordCreateFormInputValues, errorMessage: string) => void;
+    onCancel?: () => void;
     onChange?: (fields: RecordCreateFormInputValues) => RecordCreateFormInputValues;
     onValidate?: RecordCreateFormValidationValues;
 } & React.CSSProperties>;
