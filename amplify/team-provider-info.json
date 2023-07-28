@@ -9,14 +9,37 @@
       "UnauthRoleName": "amplify-personalfinancialtra-staging-100756-unauthRole",
       "StackName": "amplify-personalfinancialtra-staging-100756",
       "StackId": "arn:aws:cloudformation:eu-central-1:460535678630:stack/amplify-personalfinancialtra-staging-100756/cc059df0-2940-11ee-9775-022ac5305bea",
-      "AmplifyAppId": "d3rh19oqr156z0"
+      "AmplifyAppId": "d3rh19oqr156z0",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-personalfinancialtra-staging-100756-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "PersonalFinancialTracker": {}
       },
       "api": {
-        "PersonalFinancialTracker": {}
+        "PersonalFinancialTracker": {},
+        "nordigen": {}
+      },
+      "function": {
+        "personalfinancialtraa602e1fc": {
+          "deploymentBucketName": "amplify-personalfinancialtra-staging-100756-deployment",
+          "s3Key": "amplify-builds/personalfinancialtraa602e1fc-646b4c2f34384c374f6f-build.zip"
+        }
+      },
+      "notifications": {
+        "Pinpoint": {
+          "Name": "personalfinancialtra-staging",
+          "Id": "5f48dd33a76041dc8e278cc61bcc8c7e",
+          "Region": "eu-central-1"
+        }
+      },
+      "analytics": {
+        "Pinpoint": {
+          "Name": "personalfinancialtra-staging",
+          "Id": "5f48dd33a76041dc8e278cc61bcc8c7e",
+          "Region": "eu-central-1"
+        },
+        "personalfinancialtra": {}
       }
     }
   }

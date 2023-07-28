@@ -3,21 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@aws-amplify/ui-react": "^5.0.5",
+    "@aws-amplify/ui-react": "^5.0.6",
+    "@aws-amplify/ui-react-notifications": "^1.0.7",
+    "@craco/craco": "^7.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "aws-amplify": "^5.3.5",
+    "browserify-zlib": "^0.2.0",
+    "https": "^1.0.0",
+    "node-polyfill-webpack-plugin": "^2.0.1",
+    "nordigen-node": "^1.2.6",
+    "os": "^0.1.2",
+    "path-browserify": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
+    "stream": "^0.0.2",
+    "tty": "^1.0.1",
+    "tty-browserify": "^0.0.1",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,5 +49,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.1"
   }
 }

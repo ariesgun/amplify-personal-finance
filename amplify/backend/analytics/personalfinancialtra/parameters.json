@@ -1,0 +1,22 @@
+{
+  "appName": "personalfinancialtra",
+  "roleName": "pinpointLambdaRolef0160534",
+  "cloudformationPolicyName": "cloudformationPolicyf0160534",
+  "cloudWatchPolicyName": "cloudWatchPolicyf0160534",
+  "pinpointPolicyName": "pinpointPolicyf0160534",
+  "authPolicyName": "pinpoint_amplify_f0160534",
+  "unauthPolicyName": "pinpoint_amplify_f0160534",
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "authRoleArn": {
+    "Fn::GetAtt": [
+      "AuthRole",
+      "Arn"
+    ]
+  },
+  "pinpointInAppMessagingPolicyName": "pinpointInAppMessagingPolicyNamef0160534"
+}

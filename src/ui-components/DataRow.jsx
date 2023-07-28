@@ -15,7 +15,7 @@ export default function DataRow(props) {
       gap="16px"
       direction="row"
       width="991px"
-      height="unset"
+      height="53px"
       justifyContent="center"
       alignItems="center"
       position="relative"

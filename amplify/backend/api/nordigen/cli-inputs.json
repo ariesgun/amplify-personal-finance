@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/records/{accountId}": {
+      "name": "/records/{accountId}",
+      "lambdaFunction": "personalfinancialtraa602e1fc",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}
