@@ -31,6 +31,14 @@ const navBarOverrides = (navigate) => {
           navigate('/dashboard')
         }
       },
+      'Records': {
+        style: {
+          cursor: 'pointer'
+        },
+        onClick: () => {
+          navigate('/records')
+        }
+      },
       'Button39493466': {
         onClick: () => {
           navigate('/login')
