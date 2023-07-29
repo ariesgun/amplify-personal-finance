@@ -123,7 +123,7 @@ function Dashboard() {
             try {
                 const records = await DataStore.query(Record, Predicates.ALL, {
                     page:0,
-                    limit: 5
+                    limit: 8
                 });
                 console.log(records)
                 return records;
@@ -212,7 +212,7 @@ function Dashboard() {
                     alignItems={'center'}
                     padding={'50px 0px 50px 0px'}
                 >
-                    <Heading level={5}>Top 5 records</Heading>
+                    <Heading level={5}>Latest 8 records</Heading>
                     <Divider />
                     <DataRowCollection 
                         width={'100%'}
