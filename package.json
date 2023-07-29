@@ -12,6 +12,7 @@
     "aws-amplify": "^5.3.5",
     "browserify-zlib": "^0.2.0",
     "chart.js": "^4.3.2",
+    "faker": "^6.6.6",
     "https": "^1.0.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "nordigen-node": "^1.2.6",
@@ -53,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "assert": "^2.0.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
