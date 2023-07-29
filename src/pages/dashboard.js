@@ -2,7 +2,7 @@ import { Button, Card, Divider, Flex, Heading, View, useTheme } from "@aws-ampli
 import NavBarHeader2Override from "../components/NavBar";
 import { DataRowCollection, MarketingFooterSimple } from "../ui-components";
 import { useEffect, useState } from "react";
-import { DataStore, Notifications, Predicates } from "aws-amplify";
+import { DataStore, Notifications, Predicates, SortDirection } from "aws-amplify";
 import { Record } from "../models";
 import { InAppMessageDisplay, useInAppMessaging, withInAppMessaging } from "@aws-amplify/ui-react-notifications";
 
@@ -35,14 +35,15 @@ const StyledModalMessage = (props) => (
 );
 
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Filler,
-  Legend
+    ArcElement,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Filler,
+    Legend
 );
 
 export const lineOptions = {
@@ -53,54 +54,13 @@ export const lineOptions = {
     },
     title: {
       display: true,
-      text: 'Chart.js Line Chart'
+      text: 'Account Balance'
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-export const lineData = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-
-ChartJS.register(ArcElement, Tooltip, Legend);
-
-const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
 
   const css = `.custom-card-class {
     border: 3px solid lightblue;
@@ -110,7 +70,70 @@ const data = {
 function Dashboard() {
 
     const [records, setRecords] = useState([])
+    const [categories, setCategories] = useState([])
+    const [cateogriesPerMonth, setCategoriesPerMonth] = useState({})
+    const [cateogriesPerYear, setCategoriesPerYear] = useState({})
+    const [recordsPerMonth, setRecordsPerMonth] = useState({})
     const { displayMessage } = useInAppMessaging();
+
+    const pieData = {
+        labels: categories,
+        datasets: [
+          {
+            label: 'Amount',
+            data: cateogriesPerMonth,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+
+    const pieTotalData = {
+        labels: categories,
+        datasets: [
+          {
+            label: 'Amount',
+            data: cateogriesPerYear,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+    
+    const lineData = {
+      labels,
+      datasets: [
+        {
+          fill: true,
+          label: 'Balance',
+          data: labels.map((el) => recordsPerMonth[el]),
+          borderColor: 'rgb(53, 162, 235)',
+          backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+      ],
+    };
 
     const myMessageReceivedHandler = (message) => {
     // Do something with the received message
@@ -122,10 +145,8 @@ function Dashboard() {
         const fetchRecords = async () => {
             try {
                 const records = await DataStore.query(Record, Predicates.ALL, {
-                    page:0,
-                    limit: 8
-                });
-                console.log(records)
+                    sort: (s) => s.transactionDate(SortDirection.DESCENDING)
+                })
                 return records;
             } catch (error) {
                 console.log("Error fetching records", error)
@@ -133,7 +154,58 @@ function Dashboard() {
         }
 
         fetchRecords().then((_records) => {
-            setRecords(_records)
+            setRecords(_records.slice(0, 8))
+
+            // Records per month
+            let recordsPerMonth = {}
+            labels.forEach( (e, idx) => {
+                recordsPerMonth[e] = _records.reduce((total, current) => {
+                    if (new Date(current.transactionDate).getMonth() === idx+1) {
+                        return total + current.amount
+                    } else {
+                        return total
+                    }
+                }, 0) 
+            });
+            setRecordsPerMonth(recordsPerMonth)
+            console.log("Per month: ", recordsPerMonth)
+
+            const categories = new Set()
+            _records.forEach((el) => {
+                categories.add(el.category)
+            })
+            setCategories(Array.from(categories))
+
+            // Records per category of this month
+            let recordsPerCategory = []
+            categories.forEach( (e, idx) => {
+                recordsPerCategory.push(_records.reduce((total, current) => {
+                    if ((new Date(current.transactionDate).getMonth() === new Date(Date.now()).getMonth()) && (current.category === e)) {
+                        return total + current.amount
+                    } else {
+                        return total
+                    }
+                }, 0))
+            });
+            setCategoriesPerMonth(recordsPerCategory)
+            console.log("Categories", categories)
+            console.log("Per Category this month: ", recordsPerCategory)
+
+
+            // Records per category in a year
+            let recordsPerCategoryPerYear = []
+            categories.forEach( (e, idx) => {
+                recordsPerCategoryPerYear.push(_records.reduce((total, current) => {
+                    if (current.category === e) {
+                        return total + current.amount
+                    } else {
+                        return total
+                    }
+                }, 0))
+            });
+            setCategoriesPerYear(recordsPerCategoryPerYear)
+            console.log("Per Year: ", recordsPerCategoryPerYear)
+
         })
         
 
@@ -200,10 +272,10 @@ function Dashboard() {
                         justifyContent={'center'}
                     >
                         <Card>
-                            <Pie width={500} data={data} />
+                            <Pie width={500} data={pieData} />
                         </Card>
                         <Card>
-                            <Pie width={500} data={data} />
+                            <Pie width={500} data={pieTotalData} />
                         </Card>
                     </Flex>
                 </Flex>
