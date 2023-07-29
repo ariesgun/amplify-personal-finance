@@ -5,10 +5,10 @@ import { useEffect } from 'react';
 import { API } from 'aws-amplify';
 // import NordigenClient from 'nordigen-node';
 
+
 export default function Home() {
 
     useEffect(() => {
-
         // const client = new NordigenClient({
         //     secretId: process.env.NORDIGEN_SECRET_ID,
         //     secretKey: process.env.NORDIGEN_SECRET_KEY

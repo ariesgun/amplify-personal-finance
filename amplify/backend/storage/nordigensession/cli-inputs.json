@@ -1,0 +1,14 @@
+{
+  "resourceName": "nordigensession",
+  "tableName": "nordigensession",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "created",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

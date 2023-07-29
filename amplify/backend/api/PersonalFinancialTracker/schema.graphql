@@ -1,3 +1,13 @@
+type SessionNordigen @model @auth(rules: [{allow: private}, {allow: public, provider: iam}]) {
+  id: ID!
+  createdAt: String
+  institutionId: String
+  agreement: String
+  reference: String
+  link: String
+  status: String
+}
+
 type Record @model @auth(rules: [{allow: owner}]) {
   id: ID!
   name: String
@@ -6,4 +16,5 @@ type Record @model @auth(rules: [{allow: owner}]) {
   transactionDate: AWSDate
   currency: String
   description: String
-} 
+}
+ 

@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "nordigen-node": "1.2.6",
+    "nordigen-bank-ui": "1.5.3",
+    "aws-sdk": "2.1425.0"
+  },
+  "devDependencies": {}
+}

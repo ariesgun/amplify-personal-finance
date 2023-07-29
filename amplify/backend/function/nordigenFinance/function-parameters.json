@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "storage": {
+      "nordigensession": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "personalfinancialtralayernordigen",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true,
+      "env": "staging"
+    }
+  ],
+  "secretNames": [
+    "NORDIGEN_SECRET_ID",
+    "NORDIGEN_SECRET_KEY"
+  ]
+}

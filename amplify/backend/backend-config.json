@@ -33,20 +33,6 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
-    },
-    "nordigen": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "personalfinancialtraa602e1fc"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
     }
   },
   "auth": {
@@ -84,10 +70,33 @@
     }
   },
   "function": {
-    "personalfinancialtraa602e1fc": {
+    "nordigenFinance": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "nordigensession"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "personalfinancialtralayernordigen"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "personalfinancialtralayernordigen": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer"
     }
   },
   "notifications": {
@@ -123,19 +132,43 @@
         }
       ]
     },
-    "AMPLIFY_function_personalfinancialtraa602e1fc_deploymentBucketName": {
+    "AMPLIFY_function_nordigenFinance_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "personalfinancialtraa602e1fc"
+          "resourceName": "nordigenFinance"
         }
       ]
     },
-    "AMPLIFY_function_personalfinancialtraa602e1fc_s3Key": {
+    "AMPLIFY_function_nordigenFinance_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "personalfinancialtraa602e1fc"
+          "resourceName": "nordigenFinance"
+        }
+      ]
+    },
+    "AMPLIFY_function_nordigenFinance_secretsPathAmplifyAppId": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "nordigenFinance"
+        }
+      ]
+    },
+    "AMPLIFY_function_personalfinancialtralayernordigen_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "personalfinancialtralayernordigen"
+        }
+      ]
+    },
+    "AMPLIFY_function_personalfinancialtralayernordigen_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "personalfinancialtralayernordigen"
         }
       ]
     },
@@ -162,6 +195,12 @@
           "resourceName": "Pinpoint"
         }
       ]
+    }
+  },
+  "storage": {
+    "nordigensession": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

@@ -6,6 +6,42 @@ import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
 
 
+type EagerSessionNordigen = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<SessionNordigen, 'id'>;
+    readOnlyFields: 'updatedAt';
+  };
+  readonly id: string;
+  readonly createdAt?: string | null;
+  readonly institutionId?: string | null;
+  readonly agreement?: string | null;
+  readonly reference?: string | null;
+  readonly link?: string | null;
+  readonly status?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazySessionNordigen = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<SessionNordigen, 'id'>;
+    readOnlyFields: 'updatedAt';
+  };
+  readonly id: string;
+  readonly createdAt?: string | null;
+  readonly institutionId?: string | null;
+  readonly agreement?: string | null;
+  readonly reference?: string | null;
+  readonly link?: string | null;
+  readonly status?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type SessionNordigen = LazyLoading extends LazyLoadingDisabled ? EagerSessionNordigen : LazySessionNordigen
+
+export declare const SessionNordigen: (new (init: ModelInit<SessionNordigen>) => SessionNordigen) & {
+  copyOf(source: SessionNordigen, mutator: (draft: MutableModel<SessionNordigen>) => MutableModel<SessionNordigen> | void): SessionNordigen;
+}
+
 type EagerRecord = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Record, 'id'>;

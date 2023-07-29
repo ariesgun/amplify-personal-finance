@@ -37,6 +37,8 @@ export { default as ProfileCard } from "./ProfileCard";
 export { default as RecordCreateForm } from "./RecordCreateForm";
 export { default as RecordUpdateForm } from "./RecordUpdateForm";
 export { default as ReviewCard } from "./ReviewCard";
+export { default as SessionNordigenCreateForm } from "./SessionNordigenCreateForm";
+export { default as SessionNordigenUpdateForm } from "./SessionNordigenUpdateForm";
 export { default as SideBar } from "./SideBar";
 export { default as SocialPost } from "./SocialPost";
 export { default as StandardCard } from "./StandardCard";

@@ -17,14 +17,19 @@
         "PersonalFinancialTracker": {}
       },
       "api": {
-        "PersonalFinancialTracker": {},
-        "nordigen": {}
+        "PersonalFinancialTracker": {}
       },
       "function": {
-        "personalfinancialtraa602e1fc": {
+        "nordigenFinance": {
+          "secretsPathAmplifyAppId": "d3rh19oqr156z0",
           "deploymentBucketName": "amplify-personalfinancialtra-staging-100756-deployment",
-          "s3Key": "amplify-builds/personalfinancialtraa602e1fc-646b4c2f34384c374f6f-build.zip"
-        }
+          "s3Key": "amplify-builds/nordigenFinance-7464704f574234707746-build.zip"
+        },
+        "personalfinancialtralayernordigen": {
+          "deploymentBucketName": "amplify-personalfinancialtra-staging-100756-deployment",
+          "s3Key": "amplify-builds/personalfinancialtralayernordigen-LambdaLayerVersionb6eee88a-build.zip"
+        },
+        "personalfinancialtraa602e1fc": {}
       },
       "notifications": {
         "Pinpoint": {
@@ -40,6 +45,9 @@
           "Region": "eu-central-1"
         },
         "personalfinancialtra": {}
+      },
+      "storage": {
+        "nordigensession": {}
       }
     }
   }
