@@ -1,11 +1,8 @@
-type SessionNordigen @model @auth(rules: [{allow: private}, {allow: public, provider: iam}]) {
+type Account @model @auth(rules: [{allow: private}]) {
   id: ID!
-  createdAt: String
-  institutionId: String
-  agreement: String
-  reference: String
-  link: String
-  status: String
+  bank: String
+  accountNum: String
+  logo: AWSURL
 }
 
 type Record @model @auth(rules: [{allow: owner}]) {

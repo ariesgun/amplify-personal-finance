@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "paths": {
+    "/sync/{accountId}": {
+      "name": "/sync/{accountId}",
+      "lambdaFunction": "nordigenFinance",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    },
+    "/init": {
+      "name": "/init",
+      "lambdaFunction": "nordigenFinance",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    },
+    "/banks/{country}": {
+      "name": "/banks/{country}",
+      "lambdaFunction": "nordigenFinance",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

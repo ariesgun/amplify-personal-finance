@@ -10,6 +10,11 @@ export type AmplifyDependentResourcesAttributes = {
     "PersonalFinancialTracker": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string"
+    },
+    "api75983335": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
     }
   },
   "auth": {

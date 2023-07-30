@@ -4,9 +4,9 @@ import { schema } from './schema';
 
 
 
-const { SessionNordigen, Record } = initSchema(schema);
+const { Account, Record } = initSchema(schema);
 
 export {
-  SessionNordigen,
+  Account,
   Record
 };

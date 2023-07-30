@@ -4,6 +4,8 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
+export { default as AccountCreateForm } from "./AccountCreateForm";
+export { default as AccountUpdateForm } from "./AccountUpdateForm";
 export { default as ActionCard } from "./ActionCard";
 export { default as Ampligram } from "./Ampligram";
 export { default as CTASection } from "./CTASection";
@@ -37,8 +39,6 @@ export { default as ProfileCard } from "./ProfileCard";
 export { default as RecordCreateForm } from "./RecordCreateForm";
 export { default as RecordUpdateForm } from "./RecordUpdateForm";
 export { default as ReviewCard } from "./ReviewCard";
-export { default as SessionNordigenCreateForm } from "./SessionNordigenCreateForm";
-export { default as SessionNordigenUpdateForm } from "./SessionNordigenUpdateForm";
 export { default as SideBar } from "./SideBar";
 export { default as SocialPost } from "./SocialPost";
 export { default as StandardCard } from "./StandardCard";

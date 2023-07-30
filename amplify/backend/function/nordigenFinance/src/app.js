@@ -152,7 +152,26 @@ app.get('/item', async function(req, res) {
     }
   })
   
-  res.json({success: 'get call succeed! ' + process.env["NORDIGEN_SECRET_ID"], url: req.url});
+  res.json({success: 'get call succeed! ', url: req.url});
+});
+
+app.get('/banks/*', async function(req, res) {
+  console.log(req)
+  
+  const result = await getSecret()
+
+  const client = new NordigenClient({
+    secretId: result['Parameters'][0]['Value'],
+    secretKey: result['Parameters'][1]['Value']
+  });
+
+  const tokenData = await client.generateToken()
+  console.log('TokenData: ', tokenData)
+
+  const institutions = await client.institution.getInstitutions({country: "NL"});
+  console.log("Institutions: ", institutions)
+
+  res.json({success: 'Success', url: req.url, body: JSON.stringify(institutions)});
 });
 
 app.get('/item/*', async function(req, res) {
@@ -223,9 +242,43 @@ app.get('/item/*', async function(req, res) {
 * Example post method *
 ****************************/
 
-app.post('/item', function(req, res) {
+app.post('/init', async function(req, res) {
   // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  console.log(req.body)
+  const payload = JSON.parse(req.body)
+
+  const result = await getSecret()
+
+  const client = new NordigenClient({
+    secretId: result['Parameters'][0]['Value'],
+    secretKey: result['Parameters'][1]['Value']
+  });
+
+  const tokenData = await client.generateToken()
+
+  const institutionId = ''
+
+  // Initialize new bank session
+  const init = await client.initSession({
+    redirectUrl: payload.redirect_url,
+    institutionId: payload.institution_id,
+    referenceId: payload.reference_id
+  })
+
+  // Get link to authorize in the bank
+  // Authorize with your bank via this link, to gain access to account data
+  const link = init.link;
+  // requisition id is needed to get accountId in the next step
+  const requisitionId = init.id;
+
+  console.log('Link: ', link)
+  console.log('requisitionId: ', requisitionId)
+  
+  // Get account id after completed authorization with a bank
+  const requisitionData = await client.requisition.getRequisitionById(requisitionId);
+  console.log(requisitionData)
+
+  res.json({success: 'post call succeed!', url: req.url, body: JSON.stringify(requisitionData)})
 });
 
 app.post('/item/*', function(req, res) {

@@ -17,13 +17,14 @@
         "PersonalFinancialTracker": {}
       },
       "api": {
-        "PersonalFinancialTracker": {}
+        "PersonalFinancialTracker": {},
+        "api75983335": {}
       },
       "function": {
         "nordigenFinance": {
           "secretsPathAmplifyAppId": "d3rh19oqr156z0",
           "deploymentBucketName": "amplify-personalfinancialtra-staging-100756-deployment",
-          "s3Key": "amplify-builds/nordigenFinance-7464704f574234707746-build.zip"
+          "s3Key": "amplify-builds/nordigenFinance-4236334d384e7a504a67-build.zip"
         },
         "personalfinancialtralayernordigen": {
           "deploymentBucketName": "amplify-personalfinancialtra-staging-100756-deployment",

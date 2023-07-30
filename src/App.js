@@ -6,6 +6,7 @@ import Login from './pages/login';
 import Contact from './pages/contact';
 import Dashboard from './pages/dashboard';
 import Records from './pages/records';
+import SyncBank from './pages/syncBank';
 
 function SiteRoutes() {
   return (
@@ -13,6 +14,7 @@ function SiteRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/sync-bank" element={<SyncBank />} />
         <Route path="/records" element={<Records />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />

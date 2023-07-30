@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "SessionNordigen": {
-            "name": "SessionNordigen",
+        "Account": {
+            "name": "Account",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,47 +10,34 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "bank": {
+                    "name": "bank",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "accountNum": {
+                    "name": "accountNum",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "logo": {
+                    "name": "logo",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
-                    "type": "String",
+                    "type": "AWSDateTime",
                     "isRequired": false,
-                    "attributes": []
-                },
-                "institutionId": {
-                    "name": "institutionId",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "agreement": {
-                    "name": "agreement",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "reference": {
-                    "name": "reference",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "link": {
-                    "name": "link",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "status": {
-                    "name": "status",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isReadOnly": true
                 },
                 "updatedAt": {
                     "name": "updatedAt",
@@ -62,7 +49,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "SessionNordigens",
+            "pluralName": "Accounts",
             "attributes": [
                 {
                     "type": "model",
@@ -74,16 +61,6 @@ export const schema = {
                         "rules": [
                             {
                                 "allow": "private",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "public",
-                                "provider": "iam",
                                 "operations": [
                                     "create",
                                     "update",
@@ -197,5 +174,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "cefcfe2f3a27a7a4edb4ab54ca47978d"
+    "version": "11f9802b511f183f67ac3a50754b367c"
 };

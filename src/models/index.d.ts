@@ -6,40 +6,36 @@ import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
 
 
-type EagerSessionNordigen = {
+type EagerAccount = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<SessionNordigen, 'id'>;
-    readOnlyFields: 'updatedAt';
+    identifier: ManagedIdentifier<Account, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly bank?: string | null;
+  readonly accountNum?: string | null;
+  readonly logo?: string | null;
   readonly createdAt?: string | null;
-  readonly institutionId?: string | null;
-  readonly agreement?: string | null;
-  readonly reference?: string | null;
-  readonly link?: string | null;
-  readonly status?: string | null;
   readonly updatedAt?: string | null;
 }
 
-type LazySessionNordigen = {
+type LazyAccount = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<SessionNordigen, 'id'>;
-    readOnlyFields: 'updatedAt';
+    identifier: ManagedIdentifier<Account, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
+  readonly bank?: string | null;
+  readonly accountNum?: string | null;
+  readonly logo?: string | null;
   readonly createdAt?: string | null;
-  readonly institutionId?: string | null;
-  readonly agreement?: string | null;
-  readonly reference?: string | null;
-  readonly link?: string | null;
-  readonly status?: string | null;
   readonly updatedAt?: string | null;
 }
 
-export declare type SessionNordigen = LazyLoading extends LazyLoadingDisabled ? EagerSessionNordigen : LazySessionNordigen
+export declare type Account = LazyLoading extends LazyLoadingDisabled ? EagerAccount : LazyAccount
 
-export declare const SessionNordigen: (new (init: ModelInit<SessionNordigen>) => SessionNordigen) & {
-  copyOf(source: SessionNordigen, mutator: (draft: MutableModel<SessionNordigen>) => MutableModel<SessionNordigen> | void): SessionNordigen;
+export declare const Account: (new (init: ModelInit<Account>) => Account) & {
+  copyOf(source: Account, mutator: (draft: MutableModel<Account>) => MutableModel<Account> | void): Account;
 }
 
 type EagerRecord = {
