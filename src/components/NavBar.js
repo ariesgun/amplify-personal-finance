@@ -5,7 +5,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react"
 import { NavBarHeader2, NavBarHeader3} from "../ui-components"
 import { useLocation, useNavigate } from "react-router-dom"
 
-const navBarOverrides = (navigate) => {
+const navBarOverrides = (navigate, signOut) => {
     return ({
       'Home': {
         style: {
@@ -64,6 +64,12 @@ const navBarOverrides = (navigate) => {
         onClick: () => {
           navigate('/login')
         }
+      },
+      'SignOut': {
+        onClick: () => {
+          signOut()
+          navigate('/')
+        }
       }
     })
 }
@@ -78,12 +84,12 @@ export default function NavBarHeader2Override() {
     return route === 'authenticated' ? (
         <NavBarHeader3
             width={'100%'}
-            overrides={navBarOverrides(navigate)}
+            overrides={navBarOverrides(navigate, signOut)}
         />
     ) : (
         <NavBarHeader2
             width={'100%'}
-            overrides={navBarOverrides(navigate)}
+            overrides={navBarOverrides(navigate, signOut)}
         />
     );
 }

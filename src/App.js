@@ -14,6 +14,7 @@ function SiteRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/sync-bank" element={<SyncBank />} />
         <Route path="/sync-bank-finish" element={<SyncBankFinish />} />
