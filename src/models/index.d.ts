@@ -15,6 +15,8 @@ type EagerAccount = {
   readonly bank?: string | null;
   readonly accountNum?: string | null;
   readonly logo?: string | null;
+  readonly requisitionId?: string | null;
+  readonly status?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -28,6 +30,8 @@ type LazyAccount = {
   readonly bank?: string | null;
   readonly accountNum?: string | null;
   readonly logo?: string | null;
+  readonly requisitionId?: string | null;
+  readonly status?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

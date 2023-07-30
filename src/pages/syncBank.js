@@ -1,13 +1,14 @@
 import { Button, Card, Divider, Flex, Heading, View, useTheme, Image, Grid, Loader } from "@aws-amplify/ui-react";
 import NavBarHeader2Override from "../components/NavBar";
 import { useEffect, useState } from "react";
-import { API, Notifications } from "aws-amplify";
+import { API, DataStore, Notifications } from "aws-amplify";
 import { InAppMessageDisplay, useInAppMessaging, withInAppMessaging } from "@aws-amplify/ui-react-notifications";
 import { v4 as uuidv4 } from 'uuid';
 
 import '@aws-amplify/ui-react/styles.css';
 
 import { MarketingFooterSimple } from "../ui-components";
+import { Account } from "../models";
 
 const { InAppMessaging } = Notifications;
 const myFirstEvent = { name: 'first_event' };
@@ -78,7 +79,7 @@ function SyncBank() {
                     body: {
                         reference_id: uuidv4(),
                         bank_id: selectedBank,
-                        redirect_url: window.location.host + '/sync-bank-finish'
+                        redirect_url: "http://" + window.location.host + '/sync-bank-finish'
                     }
                 }
                 const res = await API.post('api75983335', '/init', data)
@@ -90,7 +91,19 @@ function SyncBank() {
         if (startSync) {
             initSession().then((res) => {
                 // Redirect to res.url
-                
+                console.log(res)
+
+                DataStore.save(
+                    new Account({
+                        bank: res.institution_id,
+                        logo: selectedBank.logo,
+                        accountNum: "",
+                        requisitionId: res.id,
+                        status: res.status
+                    })
+                );
+
+                window.location.replace(res.link)
 
             }).catch((e) => {
                 console.log(e)

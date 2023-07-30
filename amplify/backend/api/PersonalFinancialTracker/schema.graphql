@@ -3,6 +3,8 @@ type Account @model @auth(rules: [{allow: private}]) {
   bank: String
   accountNum: String
   logo: AWSURL
+  requisitionId: String
+  status: String
 }
 
 type Record @model @auth(rules: [{allow: owner}]) {

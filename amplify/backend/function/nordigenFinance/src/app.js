@@ -174,8 +174,11 @@ app.get('/banks/*', async function(req, res) {
   res.json({success: 'Success', url: req.url, body: JSON.stringify(institutions)});
 });
 
-app.get('/item/*', async function(req, res) {
+app.get('/sync/*', async function(req, res) {
   // Add your code here
+  console.log(req.params['0'])
+  const payload = req.params['0']
+
   const result = await getSecret()
 
   const client = new NordigenClient({
@@ -185,30 +188,9 @@ app.get('/item/*', async function(req, res) {
 
   const tokenData = await client.generateToken()
   console.log('TokenData: ', tokenData)
-
-  const institutions = await client.institution.getInstitutions({country: "NL"});
-  console.log("Institutions: ", institutions)
-
-  const institutionId = "RABOBANK_RABONL2U";
-
-  // Initialize new bank session
-  const init = await client.initSession({
-    redirectUrl: "https://gocardless.com",
-    institutionId: institutionId,
-    referenceId: randomUUID()
-  })
-
-  // Get link to authorize in the bank
-  // Authorize with your bank via this link, to gain access to account data
-  const link = init.link;
-  // requisition id is needed to get accountId in the next step
-  const requisitionId = init.id;
-
-  console.log('Link: ', link)
-  console.log('requisitionId: ', requisitionId)
   
   // Get account id after completed authorization with a bank
-  const requisitionData = await client.requisition.getRequisitionById(requisitionId);
+  const requisitionData = await client.requisition.getRequisitionById(payload);
   console.log(requisitionData)
   
   // Get account id from the list
@@ -235,7 +217,13 @@ app.get('/item/*', async function(req, res) {
   const transactions = await account.getTransactions();
   console.log(transactions)
 
-  res.json({success: 'get call succeed! ', url: req.url});
+  res.json({success: 'Success!', url: req.url, body: {
+    'account': accountId,
+    'metadata': metadata,
+    'balances': balances,
+    'transactions': transactions,
+    'requisitionData': requisitionData
+  }});
 });
 
 /****************************
@@ -245,7 +233,7 @@ app.get('/item/*', async function(req, res) {
 app.post('/init', async function(req, res) {
   // Add your code here
   console.log(req.body)
-  const payload = JSON.parse(req.body)
+  const payload = req.body
 
   const result = await getSecret()
 
@@ -261,8 +249,8 @@ app.post('/init', async function(req, res) {
   // Initialize new bank session
   const init = await client.initSession({
     redirectUrl: payload.redirect_url,
-    institutionId: payload.institution_id,
-    referenceId: payload.reference_id
+    institutionId: payload.bank_id,
+    referenceId: randomUUID()
   })
 
   // Get link to authorize in the bank

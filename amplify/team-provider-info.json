@@ -24,7 +24,7 @@
         "nordigenFinance": {
           "secretsPathAmplifyAppId": "d3rh19oqr156z0",
           "deploymentBucketName": "amplify-personalfinancialtra-staging-100756-deployment",
-          "s3Key": "amplify-builds/nordigenFinance-4236334d384e7a504a67-build.zip"
+          "s3Key": "amplify-builds/nordigenFinance-37793453375a73384277-build.zip"
         },
         "personalfinancialtralayernordigen": {
           "deploymentBucketName": "amplify-personalfinancialtra-staging-100756-deployment",

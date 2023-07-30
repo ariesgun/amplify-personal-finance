@@ -26,21 +26,31 @@ export default function AccountCreateForm(props) {
     bank: "",
     accountNum: "",
     logo: "",
+    requisitionId: "",
+    status: "",
   };
   const [bank, setBank] = React.useState(initialValues.bank);
   const [accountNum, setAccountNum] = React.useState(initialValues.accountNum);
   const [logo, setLogo] = React.useState(initialValues.logo);
+  const [requisitionId, setRequisitionId] = React.useState(
+    initialValues.requisitionId
+  );
+  const [status, setStatus] = React.useState(initialValues.status);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setBank(initialValues.bank);
     setAccountNum(initialValues.accountNum);
     setLogo(initialValues.logo);
+    setRequisitionId(initialValues.requisitionId);
+    setStatus(initialValues.status);
     setErrors({});
   };
   const validations = {
     bank: [],
     accountNum: [],
     logo: [{ type: "URL" }],
+    requisitionId: [],
+    status: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -71,6 +81,8 @@ export default function AccountCreateForm(props) {
           bank,
           accountNum,
           logo,
+          requisitionId,
+          status,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -128,6 +140,8 @@ export default function AccountCreateForm(props) {
               bank: value,
               accountNum,
               logo,
+              requisitionId,
+              status,
             };
             const result = onChange(modelFields);
             value = result?.bank ?? value;
@@ -154,6 +168,8 @@ export default function AccountCreateForm(props) {
               bank,
               accountNum: value,
               logo,
+              requisitionId,
+              status,
             };
             const result = onChange(modelFields);
             value = result?.accountNum ?? value;
@@ -180,6 +196,8 @@ export default function AccountCreateForm(props) {
               bank,
               accountNum,
               logo: value,
+              requisitionId,
+              status,
             };
             const result = onChange(modelFields);
             value = result?.logo ?? value;
@@ -193,6 +211,62 @@ export default function AccountCreateForm(props) {
         errorMessage={errors.logo?.errorMessage}
         hasError={errors.logo?.hasError}
         {...getOverrideProps(overrides, "logo")}
+      ></TextField>
+      <TextField
+        label="Requisition id"
+        isRequired={false}
+        isReadOnly={false}
+        value={requisitionId}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              bank,
+              accountNum,
+              logo,
+              requisitionId: value,
+              status,
+            };
+            const result = onChange(modelFields);
+            value = result?.requisitionId ?? value;
+          }
+          if (errors.requisitionId?.hasError) {
+            runValidationTasks("requisitionId", value);
+          }
+          setRequisitionId(value);
+        }}
+        onBlur={() => runValidationTasks("requisitionId", requisitionId)}
+        errorMessage={errors.requisitionId?.errorMessage}
+        hasError={errors.requisitionId?.hasError}
+        {...getOverrideProps(overrides, "requisitionId")}
+      ></TextField>
+      <TextField
+        label="Status"
+        isRequired={false}
+        isReadOnly={false}
+        value={status}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              bank,
+              accountNum,
+              logo,
+              requisitionId,
+              status: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.status ?? value;
+          }
+          if (errors.status?.hasError) {
+            runValidationTasks("status", value);
+          }
+          setStatus(value);
+        }}
+        onBlur={() => runValidationTasks("status", status)}
+        errorMessage={errors.status?.errorMessage}
+        hasError={errors.status?.hasError}
+        {...getOverrideProps(overrides, "status")}
       ></TextField>
       <Flex
         justifyContent="space-between"
