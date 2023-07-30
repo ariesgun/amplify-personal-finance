@@ -2,28 +2,15 @@ import { Button, Divider, Flex, Heading, View } from "@aws-amplify/ui-react";
 import NavBarHeader2Override from "../components/NavBar";
 import { DataRowCollection, MarketingFooterSimple, RecordCreateForm, RecordUpdateForm } from "../ui-components";
 import { useEffect, useState } from "react";
-import { DataStore, Notifications } from "aws-amplify";
+import { DataStore } from "aws-amplify";
 import { Record } from "../models";
-import { InAppMessageDisplay, InAppMessagingProvider, useInAppMessaging, withInAppMessaging } from "@aws-amplify/ui-react-notifications";
 
 import '@aws-amplify/ui-react/styles.css';
+
 
 async function onDelete(item) {
     await DataStore.delete(Record, item)
 }
-
-const { InAppMessaging } = Notifications;
-const myFirstEvent = { name: 'first_event' };
-
-const StyledModalMessage = (props) => (
-    <InAppMessageDisplay.ModalMessage
-      {...props}
-      style={{ 
-            container: { backgroundColor: 'antiquewhite' },
-            body: { padding: '50px 0px 150px 0px' },
-        }}
-    />
-);
 
 function Records() {
 
@@ -31,14 +18,6 @@ function Records() {
     const [showEditModal, setShowEditModal] = useState(false)
     const [records, setRecords] = useState([])
     const [selectedRecord, setSelectedRecord] = useState({})
-
-    const { displayMessage } = useInAppMessaging();
-
-    const myMessageReceivedHandler = (message) => {
-    // Do something with the received message
-        console.log("Hey", message)
-        displayMessage(message);
-    };
 
     useEffect(() => {
         const fetchRecords = async () => {
@@ -53,13 +32,6 @@ function Records() {
 
         const records = fetchRecords()
         setRecords(records)
-
-        InAppMessaging.syncMessages();
-        const listener = InAppMessaging.onMessageDisplayed(myMessageReceivedHandler);
-
-        setTimeout(() => {
-            InAppMessaging.dispatchEvent(myFirstEvent);
-        }, 5000)
     }, [])
 
     return (
@@ -67,7 +39,6 @@ function Records() {
             direction={'column'}
             height={'100vh'}
         >
-            {/* <InAppMessageDisplay /> */}
             <Flex>
                 <NavBarHeader2Override />
             </Flex>
@@ -78,7 +49,7 @@ function Records() {
                     "small": '20px 80px 20px 80px',
                     "large": '80px 290px 80px 290px'
                 }}
-                width={'80%'}
+                width={'82%'}
                 margin={'0 auto'}
             >
                 <Flex
@@ -143,8 +114,4 @@ function Records() {
     );
 }
 
-export default withInAppMessaging(Records, {
-    components: {
-        ModalMessage: StyledModalMessage,
-    }
-})
+export default Records;

@@ -11,36 +11,30 @@ import { MarketingFooterSimple } from "../ui-components";
 import { Account } from "../models";
 
 const { InAppMessaging } = Notifications;
-const myFirstEvent = { name: 'first_event' };
-
-const StyledModalMessage = (props) => (
-    <InAppMessageDisplay.ModalMessage
-      {...props}
-      style={{ 
-            container: { backgroundColor: 'antiquewhite' },
-            body: { padding: '50px 0px 150px 0px' },
-        }}
-    />
-);
+const myFirstEvent = { name: 'premium_offer' };
 
 const css = `.custom-card-class {
     border: 3px solid lightblue;
     border-radius: 25px;
   }`;
 
+const StyledBannerMessage = (props) => (
+    <InAppMessageDisplay.BannerMessage
+        {...props}
+        style={{ 
+            container: { backgroundColor: 'antiquewhite' },
+            body: { padding: '0px 0px 0px 0px' },
+        }}
+        position={ 'middle' }
+    />
+);
 
 function SyncBank() {
 
-    const { displayMessage } = useInAppMessaging();
     const [banks, setBanks] = useState([])
     const [selectedBank, setSelectedBank] = useState({})
     const [startSync, setStartSync] = useState(false)
-
-    const myMessageReceivedHandler = (message) => {
-    // Do something with the received message
-        console.log("Hey", message)
-        displayMessage(message);
-    };
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
 
@@ -56,19 +50,17 @@ function SyncBank() {
         fetchBanks().then((_banks) => {
             const result = JSON.parse(_banks)
             setBanks(result)
-            console.log(result, banks)
+            setLoading(false)
         })
 
-        // InAppMessaging.syncMessages();
-        // const listener = InAppMessaging.onMessageDisplayed(myMessageReceivedHandler);
+        InAppMessaging.syncMessages();
 
-        // setTimeout(() => {
-        //     InAppMessaging.dispatchEvent(myFirstEvent);
-        // }, 5000)
+        setTimeout(() => {
+            InAppMessaging.dispatchEvent(myFirstEvent);
+        }, 2000)
     }, [])
 
     useEffect(() => {
-        console.log("Bank: ", banks)
         console.log(window.location.host)
     }, [banks])
 
@@ -88,6 +80,7 @@ function SyncBank() {
                 console.log(e)
             }
         }
+
         if (startSync) {
             initSession().then((res) => {
                 // Redirect to res.url
@@ -131,7 +124,7 @@ function SyncBank() {
             >
                 <Heading level={2}>Bank Sync</Heading>
                 <Divider />
-                {startSync && (
+                {(startSync || loading) && (
                     <Flex
                         direction={'column'}
                         alignItems={'center'}
@@ -193,6 +186,6 @@ function SyncBank() {
 
 export default withInAppMessaging(SyncBank, {
     components: {
-        ModalMessage: StyledModalMessage,
+        BannerMessage: StyledBannerMessage,
     }
 })

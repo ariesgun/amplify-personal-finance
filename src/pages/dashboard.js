@@ -19,8 +19,6 @@ import {
     Filler
 } from 'chart.js';
 
-import { faker } from '@faker-js/faker';
-
 const { InAppMessaging } = Notifications;
 const myFirstEvent = { name: 'first_event' };
 
@@ -135,12 +133,6 @@ function Dashboard() {
       ],
     };
 
-    const myMessageReceivedHandler = (message) => {
-    // Do something with the received message
-        console.log("Hey", message)
-        displayMessage(message);
-    };
-
     useEffect(() => {
         const fetchRecords = async () => {
             try {
@@ -210,11 +202,10 @@ function Dashboard() {
         
 
         InAppMessaging.syncMessages();
-        const listener = InAppMessaging.onMessageDisplayed(myMessageReceivedHandler);
 
-        // setTimeout(() => {
-        //     InAppMessaging.dispatchEvent(myFirstEvent);
-        // }, 5000)
+        setTimeout(() => {
+            InAppMessaging.dispatchEvent(myFirstEvent);
+        }, 3000)
     }, [])
 
     const { tokens } = useTheme()

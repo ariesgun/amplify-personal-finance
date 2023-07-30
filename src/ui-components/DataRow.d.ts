@@ -15,7 +15,9 @@ export declare type DataRowOverridesProps = {
     label?: PrimitiveOverrideProps<TextProps>;
     category?: PrimitiveOverrideProps<TextProps>;
     datestamp?: PrimitiveOverrideProps<TextProps>;
-    value?: PrimitiveOverrideProps<TextProps>;
+    "Frame 438"?: PrimitiveOverrideProps<FlexProps>;
+    currency?: PrimitiveOverrideProps<TextProps>;
+    amount?: PrimitiveOverrideProps<TextProps>;
     EditButton?: PrimitiveOverrideProps<ButtonProps>;
     RemoveButton?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;

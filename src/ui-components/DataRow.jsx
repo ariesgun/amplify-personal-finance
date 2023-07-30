@@ -101,29 +101,61 @@ export default function DataRow(props) {
         children={record?.transactionDate}
         {...getOverrideProps(overrides, "datestamp")}
       ></Text>
-      <Text
-        fontFamily="Inter"
-        fontSize="16px"
-        fontWeight="400"
-        color="rgba(48,64,80,1)"
-        lineHeight="24px"
-        textAlign="left"
-        display="block"
-        direction="column"
-        justifyContent="unset"
-        width="unset"
-        height="unset"
-        gap="unset"
-        alignItems="unset"
-        grow="1"
-        shrink="1"
-        basis="0"
+      <Flex
+        gap="15px"
+        direction="row"
+        width="303.5px"
+        height="24px"
+        justifyContent="flex-start"
+        alignItems="center"
+        shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children={record?.amount}
-        {...getOverrideProps(overrides, "value")}
-      ></Text>
+        {...getOverrideProps(overrides, "Frame 438")}
+      >
+        <Text
+          fontFamily="Inter"
+          fontSize="16px"
+          fontWeight="400"
+          color="rgba(13,26,38,1)"
+          lineHeight="24px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="unset"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children={record?.currency}
+          {...getOverrideProps(overrides, "currency")}
+        ></Text>
+        <Text
+          fontFamily="Inter"
+          fontSize="14px"
+          fontWeight="400"
+          color="rgba(13,26,38,1)"
+          lineHeight="21px"
+          textAlign="left"
+          display="block"
+          direction="column"
+          justifyContent="unset"
+          width="120px"
+          height="unset"
+          gap="unset"
+          alignItems="unset"
+          shrink="0"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          whiteSpace="pre-wrap"
+          children={record?.amount}
+          {...getOverrideProps(overrides, "amount")}
+        ></Text>
+      </Flex>
       <Button
         width="unset"
         height="unset"

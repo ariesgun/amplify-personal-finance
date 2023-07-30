@@ -39,6 +39,22 @@ const navBarOverrides = (navigate) => {
           navigate('/records')
         }
       },
+      'BankSync': {
+        style: {
+          cursor: 'pointer'
+        },
+        onClick: () => {
+          navigate('/sync-bank')
+        }
+      },
+      'Profile': {
+        style: {
+          cursor: 'pointer'
+        },
+        onClick: () => {
+          navigate('/profile')
+        }
+      },
       'Button39493466': {
         onClick: () => {
           navigate('/login')
