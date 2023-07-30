@@ -18,6 +18,7 @@ import {
     Title,
     Filler
 } from 'chart.js';
+import { useNavigate } from "react-router-dom";
 
 const { InAppMessaging } = Notifications;
 const myFirstEvent = { name: 'first_event' };
@@ -73,6 +74,7 @@ function Dashboard() {
     const [cateogriesPerYear, setCategoriesPerYear] = useState({})
     const [recordsPerMonth, setRecordsPerMonth] = useState({})
     const { displayMessage } = useInAppMessaging();
+    const navigate = useNavigate()
 
     const pieData = {
         labels: categories,
@@ -283,7 +285,9 @@ function Dashboard() {
                         items={records}
                         isPaginated={false}
                     />
-                    <Button>
+                    <Button onClick={() => {
+                        navigate('/records')
+                    }}>
                         View all
                     </Button>
                 </Flex>
